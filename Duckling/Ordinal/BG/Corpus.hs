@@ -9,18 +9,11 @@
 {-# LANGUAGE OverloadedStrings #-}
 
 module Duckling.Ordinal.BG.Corpus
-<<<<<<< HEAD
-  ( corpus ) where
-
-import Prelude
-import Data.String
-=======
   ( corpus
   ) where
 
 import Data.String
 import Prelude
->>>>>>> upstream/master
 
 import Duckling.Locale
 import Duckling.Ordinal.Types
@@ -28,11 +21,7 @@ import Duckling.Resolve
 import Duckling.Testing.Types
 
 corpus :: Corpus
-<<<<<<< HEAD
-corpus = (testContext {locale = makeLocale BG Nothing}, allExamples)
-=======
 corpus = (testContext {locale = makeLocale BG Nothing}, testOptions, allExamples)
->>>>>>> upstream/master
 
 allExamples :: [Example]
 allExamples = concat
