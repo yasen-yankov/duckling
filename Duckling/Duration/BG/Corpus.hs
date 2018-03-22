@@ -22,7 +22,11 @@ import Duckling.Testing.Types
 import Duckling.TimeGrain.Types (Grain(..))
 
 corpus :: Corpus
+<<<<<<< HEAD
 corpus = (testContext {locale = makeLocale BG Nothing}, allExamples)
+=======
+corpus = (testContext {locale = makeLocale BG Nothing}, testOptions, allExamples)
+>>>>>>> upstream/master
 
 allExamples :: [Example]
 allExamples = concat

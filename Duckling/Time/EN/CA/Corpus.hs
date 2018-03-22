@@ -33,6 +33,7 @@ allExamples = concat
              , "10/31/74"
              , "10-31-74"
              , "10.31.1974"
+             , "10 31 1974"
              ]
   , examples (datetime (2013, 4, 25, 16, 0, 0) Minute)
              [ "4/25 at 4:00pm"
@@ -57,5 +58,14 @@ allExamples = concat
              ]
   , examples (datetime (2017, 10, 9, 0, 0, 0) Day)
              [ "thanksgiving 2017"
+             ]
+  , examples (datetime (2013, 7, 1, 0, 0, 0) Day)
+             [ "canada day"
+             , "memorial day"
+             , "dominion day"
+             , "Next Memorial Day"
+             ]
+  , examples (datetime (2013, 4, 9, 0, 0, 0) Day)
+             [ "vimy ridge day"
              ]
   ]

@@ -8,6 +8,7 @@
 
 {-# LANGUAGE GADTs #-}
 {-# LANGUAGE OverloadedStrings #-}
+<<<<<<< HEAD
 
 module Duckling.Ordinal.BG.Rules
   ( rules ) where
@@ -16,6 +17,20 @@ import Control.Monad (join)
 import qualified Data.Text as Text
 import Prelude
 import Data.String
+=======
+{-# LANGUAGE NoRebindableSyntax #-}
+
+module Duckling.Ordinal.BG.Rules
+  ( rules
+  ) where
+
+import Data.HashMap.Strict (HashMap)
+import Data.String
+import Data.Text (Text)
+import Prelude
+import qualified Data.HashMap.Strict as HashMap
+import qualified Data.Text as Text
+>>>>>>> upstream/master
 
 import Duckling.Dimensions.Types
 import Duckling.Numeral.Helpers (parseInt)
@@ -23,6 +38,33 @@ import Duckling.Ordinal.Helpers
 import Duckling.Regex.Types
 import Duckling.Types
 
+<<<<<<< HEAD
+=======
+ordinalsMap :: HashMap Text Int
+ordinalsMap = HashMap.fromList
+  [ ( "първ"         , 1 )
+  , ( "втор"         , 2 )
+  , ( "трет"         , 3 )
+  , ( "четвърт"      , 4 )
+  , ( "пет"          , 5 )
+  , ( "шест"         , 6 )
+  , ( "седм"         , 7 )
+  , ( "осм"          , 8 )
+  , ( "девет"        , 9 )
+  , ( "десет"        , 10 )
+  , ( "единадесет"   , 11 )
+  , ( "дванадесет"   , 12 )
+  , ( "тринадесет"   , 13 )
+  , ( "четиринадесет", 14 )
+  , ( "петнадесет"   , 15 )
+  , ( "шестнадесет"  , 16 )
+  , ( "седемнадесет" , 17 )
+  , ( "осемнадесет"  , 18 )
+  , ( "деветнадесет" , 19 )
+  , ( "двадесет"     , 20 )
+  ]
+
+>>>>>>> upstream/master
 ruleOrdinalsFirstth :: Rule
 ruleOrdinalsFirstth = Rule
   { name = "ordinals (first..19th)"
@@ -30,6 +72,7 @@ ruleOrdinalsFirstth = Rule
     [ regex "(първ|втор|трет|четвърт|пет|шест|седм|осм|девет|десет|единадесет|дванадесет|тринадесет|четиринадесет|петнадесет|шестнадесет|седемнадесет|осемнадесет|деветнадесет|двадесет)(и(я(т)?|те)?|а(та)?|о(то)?)"
     ]
   , prod = \tokens -> case tokens of
+<<<<<<< HEAD
       (Token RegexMatch (GroupMatch (match:_)):_) -> case Text.toLower match of
         "първ" -> Just $ ordinal 1
         "втор" -> Just $ ordinal 2
@@ -55,17 +98,41 @@ ruleOrdinalsFirstth = Rule
       _ -> Nothing
   }
 
+=======
+      (Token RegexMatch (GroupMatch (match:_)):_) ->
+        ordinal <$> HashMap.lookup (Text.toLower match) ordinalsMap
+      _ -> Nothing
+  }
+
+dozensMap :: HashMap Text Int
+dozensMap = HashMap.fromList
+  [ ( "двадесет"  , 20 )
+  , ( "тридесет"  , 30 )
+  , ( "четирдесет", 40 )
+  , ( "петдесет"  , 50 )
+  , ( "шестдесет" , 60 )
+  , ( "седемдесет", 70 )
+  , ( "осемдесет" , 80 )
+  , ( "деветдесет", 90 )
+  ]
+
+>>>>>>> upstream/master
 ruleOrdinal :: Rule
 ruleOrdinal = Rule
   { name = "ordinal 21..99"
   , pattern =
     [ regex "(двадесет|тридесет|четирдесет|петдесет|шестдесет|седемдесет|осемдесет|деветдесет)"
+<<<<<<< HEAD
     , regex "и (първ|втор|трет|четвърт|пет|шест|седм|осм|девет)(и(я(т)?|те)?|а(та)?|о(то)?)"
+=======
+    , regex "и (първ|втор|трет|четвърт|пет|шест|седм|осм|девет)(и(ят?|те)?|а(та)?|о(то)?)"
+>>>>>>> upstream/master
     ]
   , prod = \tokens -> case tokens of
       (Token RegexMatch (GroupMatch (m1:_)):
        Token RegexMatch (GroupMatch (m2:_)):
        _) -> do
+<<<<<<< HEAD
          dozen <- case Text.toLower m1 of
            "двадесет" -> Just 20
            "тридесет" -> Just 30
@@ -87,6 +154,10 @@ ruleOrdinal = Rule
            "осм" -> Just 8
            "девет" -> Just 9
            _ -> Nothing
+=======
+         dozen <- HashMap.lookup (Text.toLower m1) dozensMap
+         unit <- HashMap.lookup (Text.toLower m2) ordinalsMap
+>>>>>>> upstream/master
          Just . ordinal $ dozen + unit
       _ -> Nothing
   }
